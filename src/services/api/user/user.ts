@@ -7,9 +7,9 @@ export type TRegisterData = {
     email: string;
     name: string;
     password: string;
-  };
+};
   
-type TAuthResponse = TServerResponse<{
+export type TAuthResponse = TServerResponse<{
     refreshToken: string;
     accessToken: string;
     user: TUser;
@@ -76,14 +76,14 @@ type TAuthResponse = TServerResponse<{
         return Promise.reject(data);
       });
   
-  type TUserResponse = TServerResponse<{ user: TUser }>;
+export type TUserResponse = TServerResponse<{ user: TUser }>;
   
   export const getUserApi = () =>
     fetchWithRefresh<TUserResponse>(`${URL}/auth/user`, {
       headers: {
         authorization: getCookie('accessToken')
       } as HeadersInit
-    });
+    })
   
   export const updateUserApi = (user: Partial<TRegisterData>) =>
     fetchWithRefresh<TUserResponse>(`${URL}/auth/user`, {

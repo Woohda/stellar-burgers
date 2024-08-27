@@ -1,6 +1,6 @@
 import { getFeedsApi, getOrdersApi } from "./feeds/feeds";
 import { getIngredientsApi } from "./ingredients/ingredients";
-import { getOrderByNumberApi, orderBurgerApi } from "./oreder/order";
+import { getOrderByNumberApi, orderBurgerApi } from "./order/order";
 import { refreshToken } from "./token/RefreshToken";
 import {
     forgotPasswordApi,
@@ -17,7 +17,8 @@ export type TServerResponse<T> = {
   } & T;
 
 export const checkResponse = <T>(res: Response): Promise<T> =>
-    res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+    res.ok ? res.json() : res.json()
+    .then((err) => Promise.reject(err));
 
 export const URL = process.env.BURGER_API_URL;
 

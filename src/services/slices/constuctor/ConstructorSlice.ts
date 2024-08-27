@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSelector, createSlice, nanoid, PayloadAction, Slice } from "@reduxjs/toolkit";
+import { createSelector, createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
 import { TConstructorIngredient, TIngredient, TOrder, TTabMode } from "@utils-types";
-import postRequestOrder from "./actions";
+import postRequestOrder from "./actions"; 
 
 interface ConstructorState {
     constructorItems:{
@@ -29,6 +29,16 @@ export const constructorSlice = createSlice({
         selectIsPostRequestOrderPending: (state: ConstructorState) => state.orderRequestStatus === 'pending',
         selectIsOrderModalData: (state: ConstructorState) => state.orderModalData,
         selectIsConstructorItems: (state: ConstructorState) => state.constructorItems,
+        formationUserOrder: createSelector(
+            (state: ConstructorState) => state.constructorItems.bun?._id,
+            (state: ConstructorState) => state.constructorItems.ingredients,
+            (_id, ingredients): string[] => {
+                if(_id && ingredients){
+                    return [_id, ...ingredients.map((ingredient) => ingredient._id), _id]
+                }
+                return []
+            }           
+        ),
         getTotalPrice: createSelector(
             (state: ConstructorState) => state.constructorItems,
             (constructorItems) => {
@@ -42,7 +52,6 @@ export const constructorSlice = createSlice({
                 return bunPrice + ingredientsPrice;         
             }
         )
-
     },
     reducers: {
         addIngredient: {
@@ -76,6 +85,9 @@ export const constructorSlice = createSlice({
             state.constructorItems.ingredients = state.constructorItems.ingredients?.filter(
                 (ingredient) => ingredient.id !== action.payload
             ) ?? null;
+        },
+        resetOrderModal: (state) => {
+            state.orderModalData = null
         }
     },
     extraReducers: (builder) => {
@@ -100,12 +112,14 @@ export const {
     addIngredient, 
     moveIngredientUp, 
     moveIngredientDown, 
-    removeIngredient } = constructorSlice.actions
+    removeIngredient,
+    resetOrderModal } = constructorSlice.actions
 
 export const { 
     selectIsPostRequestOrderPending,
     selectIsOrderModalData,
     selectIsConstructorItems,
+    formationUserOrder,
     getTotalPrice } = constructorSlice.selectors
 
 export default constructorSlice.reducer

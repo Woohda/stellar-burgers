@@ -1,20 +1,40 @@
 import { FC } from 'react';
 import { BurgerConstructorUI } from '@ui';
-import { useAppSelector } from '../../services/hooks/appHooks';
-import { getTotalPrice, selectIsConstructorItems, selectIsOrderModalData, selectIsPostRequestOrderPending } from '../../services/slices/constuctor/ConstructorSlice';
+import { useAppDispatch, useAppSelector } from '../../services/hooks/appHooks';
+import { 
+  formationUserOrder,
+  getTotalPrice, 
+  resetOrderModal, 
+  selectIsConstructorItems, 
+  selectIsOrderModalData, 
+  selectIsPostRequestOrderPending } from '../../services/slices/constuctor/ConstructorSlice';
+import { getUser } from '../../services/slices/user/UserSlice';
+import postRequestOrder from '../../services/slices/constuctor/actions';
+import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
+  const user = useAppSelector(getUser);
+  const userOrder= useAppSelector(formationUserOrder);
+  const price = useAppSelector((state) => getTotalPrice(state));
   const constructorItems = useAppSelector(selectIsConstructorItems);
   const orderRequest = useAppSelector(selectIsPostRequestOrderPending);
   const orderModalData = useAppSelector(selectIsOrderModalData);
 
   const onOrderClick = () => {
-    if (!constructorItems.bun || orderRequest) return;
+    if (constructorItems.bun && user) {
+      dispatch(postRequestOrder(userOrder))
+    }
+    if (!user) {
+      navigate('/login');
+    }
   };
-  const closeOrderModal = () => {};
 
-const price = useAppSelector((state) => getTotalPrice(state));
+  const closeOrderModal = () => {
+    dispatch(resetOrderModal());
+  };
 
   return (
     <BurgerConstructorUI
