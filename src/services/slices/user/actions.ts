@@ -14,15 +14,15 @@ import { deleteCookie, setCookie } from "../../../utils/cookie";
 
 export const fetchUser = createAppAsyncThunk(
     'user/fetchUser',
-    async (_?: {refetch?: boolean} = {}) => getUserApi(),
-    { 
-        condition: (params, { getState }) => {
-            const isIdle = userSlice.selectors.selectIsFetchUserIdled(getState());
-            if(!params?.refetch && !isIdle) 
-                {return false;}
-            return true;
-        }
-    } 
+    async () => getUserApi(),
+    // { 
+    //     condition: (params, { getState }) => {
+    //         const isIdle = userSlice.selectors.selectIsFetchUserIdled(getState());
+    //         if(!params?.refetch && !isIdle) 
+    //             {return false;}
+    //         return true;
+    //     }
+    // } 
 );
 
 export const loginUser = createAppAsyncThunk(
