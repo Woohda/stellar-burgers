@@ -9,7 +9,7 @@ interface OrderState {
     orderResponseStatus: 'idle' | 'pending' | 'success' | 'failed'
 }
 
-const initialState: OrderState = {
+export const initialState: OrderState = {
     orders: [],
     orderData: null,
     error: null,
