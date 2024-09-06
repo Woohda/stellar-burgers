@@ -1,7 +1,7 @@
 {
     "success": true,
-    "accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2Y2I3ODMyMTE5ZDQ1MDAxYjUwMjA5ZiIsImlhdCI6MTcyNTQ0NDc4OSwiZXhwIjoxNzI1NDQ1OTg5fQ.w9onfk7oWg14Bbt2V01ijoDo2SAuXZTZAMSeSIkVFr0",
-    "refreshToken": "66e581268354c01df80380907ee62118a27061527ec0e9dff741831076a3447e2367e9c7d30c2f2f",
+    "accessToken": "test-accessToken",
+    "refreshToken": "test-refreshToken",
     "user": {
         "email": "vlad@a.ru",
         "name": "vlad"
