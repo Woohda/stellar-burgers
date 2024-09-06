@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { BurgerConstructorUI } from '@ui';
 import { useAppDispatch, useAppSelector } from '../../services/hooks/appHooks';
 import { 
-  formationUserOrder,
+  getFormatedUserOrder,
   getTotalPrice, 
   resetOrderModal, 
   selectIsConstructorItems, 
@@ -17,7 +17,7 @@ export const BurgerConstructor: FC = () => {
   const navigate = useNavigate();
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
   const user = useAppSelector(getUser);
-  const userOrder= useAppSelector(formationUserOrder);
+  const userOrder= useAppSelector(getFormatedUserOrder);
   const price = useAppSelector((state) => getTotalPrice(state));
   const constructorItems = useAppSelector(selectIsConstructorItems);
   const orderRequest = useAppSelector(selectIsPostRequestOrderPending);

@@ -1,6 +1,14 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { TOrder, TUser } from "@utils-types";
-import { fetchUser, fetchUserOrders, forgotPassword, loginUser, logoutUser, registerUser, resetPassword, updateUser } from "./actions";
+import { 
+    fetchUser, 
+    fetchUserOrders, 
+    forgotPassword, 
+    loginUser, 
+    logoutUser, 
+    registerUser, 
+    resetPassword, 
+    updateUser } from "./actions";
 
 
 export interface UserState {
@@ -11,7 +19,7 @@ export interface UserState {
     fetchUserRequestStatus: 'idle' | 'pending' | 'success' | 'failed';
 }
 
-const initialState: UserState = {
+export const initialState: UserState = {
     user: null,
     userOrders: [],
     isAuthChecked: false,

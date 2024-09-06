@@ -1,5 +1,5 @@
 import { createSelector, createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
-import { TConstructorIngredient, TIngredient, TOrder, TTabMode } from "@utils-types";
+import { TConstructorIngredient, TIngredient, TOrder } from "@utils-types";
 import postRequestOrder from "./actions"; 
 
 interface ConstructorState {
@@ -12,7 +12,7 @@ interface ConstructorState {
     orderRequestStatus: 'idle' | 'pending' | 'success' | 'failed'
 }
 
-const initialState: ConstructorState = {
+export const initialState: ConstructorState = {
     constructorItems: {
         bun: null,
         ingredients: []
@@ -29,7 +29,7 @@ export const constructorSlice = createSlice({
         selectIsPostRequestOrderPending: (state: ConstructorState) => state.orderRequestStatus === 'pending',
         selectIsOrderModalData: (state: ConstructorState) => state.orderModalData,
         selectIsConstructorItems: (state: ConstructorState) => state.constructorItems,
-        formationUserOrder: createSelector(
+        getFormatedUserOrder: createSelector(
             (state: ConstructorState) => state.constructorItems.bun?._id,
             (state: ConstructorState) => state.constructorItems.ingredients,
             (_id, ingredients): string[] => {
@@ -119,21 +119,7 @@ export const {
     selectIsPostRequestOrderPending,
     selectIsOrderModalData,
     selectIsConstructorItems,
-    formationUserOrder,
+    getFormatedUserOrder,
     getTotalPrice } = constructorSlice.selectors
 
 export default constructorSlice.reducer
-
-
-// const constructorItems = useAppSelector(selectIsConstructorItems);
-
-//   const orderRequest = useAppSelector(selectIsPostRequestOrderPending);
-
-//   const orderModalData = useAppSelector(selectIsOrderModalData);
-
-//   const onOrderClick = () => {
-//     if (!constructorItems.bun || orderRequest) return;
-//   };
-//   const closeOrderModal = () => {};
-
-//   const price = useAppSelector((state) => getTotalPrice(state));

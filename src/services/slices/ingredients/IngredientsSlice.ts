@@ -8,7 +8,7 @@ interface IngredientsState {
     fetchIngredientsStatus: 'idle' | 'pending' | 'success' | 'failed';
 }
 
-const initialState: IngredientsState = {
+export const initialState: IngredientsState = {
     ingredients: [],
     error: null,
     fetchIngredientsStatus: 'idle',

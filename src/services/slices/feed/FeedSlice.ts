@@ -10,7 +10,7 @@ interface FeedState {
     fetchFeedStatus: 'idle' | 'pending' | 'success' | 'failed'
 }
 
-const initialState: FeedState = {
+export const initialState: FeedState = {
     orders: [],
     total: null,
     totalToday: null,

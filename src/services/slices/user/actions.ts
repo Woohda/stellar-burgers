@@ -14,7 +14,7 @@ import { deleteCookie, setCookie } from "../../../utils/cookie";
 
 export const fetchUser = createAppAsyncThunk(
     'user/fetchUser',
-    async () => getUserApi(),
+    async () => getUserApi()
     // { 
     //     condition: (params, { getState }) => {
     //         const isIdle = userSlice.selectors.selectIsFetchUserIdled(getState());
